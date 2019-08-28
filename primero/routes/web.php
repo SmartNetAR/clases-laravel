@@ -18,17 +18,3 @@ Route::get('/', function () {
     return $a + $b ;
 });
 
-Route::get('/edad/{anyo}/{mes}', function ( $anyo, $mes ) {
-
-    $fecha = getdate() ;
-
-    // var_dump($fecha) ;
-    // die() ;
-
-    $anyoActual = $fecha["year"] ;
-    
-    // dd($fecha) ;
-
-    return response()->json( ["anyo" => $anyoActual ]);
-
-});

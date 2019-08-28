@@ -16,3 +16,20 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/edad/{anyo}/{mes}', function ( $anyo, $mes ) {
+    $fecha = getdate() ;
+    // var_dump($fecha) ;
+    // die() ;
+    $anyoActual = $fecha["year"] ;
+    // dd($fecha) ;
+    return response()->json( ["anyo" => $anyoActual ]);
+});
+
+Route::get('/tasks', 'TaskController@index' );
+
+Route::get('/tasks/{id}', 'TaskController@show' );
+
+Route::post('/tasks', 'TaskController@store' );
+
