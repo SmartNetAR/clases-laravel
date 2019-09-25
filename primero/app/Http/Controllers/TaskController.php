@@ -9,11 +9,6 @@ use Validator;
 class TaskController extends Controller
 {
     public function index() {
-        // $tasks = [
-        //     ['id' => 1, 'name' => 'practicar', 'description' => 'practicar mucho todos los días'],
-        //     ['id' => 2,  'name' => 'estudiar', 'description' => 'estudiar un poco'],
-        //     ['id' => 3,  'name' => 'limpiar', 'description' => 'limpiar el código / refactorizar'],
-        // ];
         $tasks = Task::get();
         return response()->json( ["tasks" => $tasks ], 200);
     }
@@ -28,20 +23,16 @@ class TaskController extends Controller
             return response()->json(['error'=>$validator->errors()], 422);
         }
 
+        $task = new Task;
 
+        $task->name = $request->name;
+        $task->description = $request->description;
+        $task->priority = $request->priority;
+        $task->status = $request->status;
 
+        $task->save();
 
-
-
-
-
-        $taskName =  $request['name'];
-        if (!isset($taskName)) {
-            return "debe incluir el nombre" ;
-        }
-
-        return $request['name'];
-        //return response()->json( ["message" => "se guardó la tarea"] );
+        return response()->json( ["tasks" => $task ], 200 ) ;
     }
 
     public function show( $id ) {
