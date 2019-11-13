@@ -14,10 +14,14 @@ use Illuminate\Http\Request;
 */
 // Route::post('login', 'UserController@login');
 Route::post('register', 'UserController@register');
-Route::get('login', 'UserController@login');
+Route::post('login', 'UserController@login');
 Route::get('users', 'UserController@index');
 
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('profile', 'UserController@profile');
+
+    //Eventos
+    Route::get('events', 'EventController@index');
+    
 });

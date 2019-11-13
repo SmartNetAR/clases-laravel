@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
+use Auth;
 use App\User;
 
 class UserController extends Controller
 {
-    public function login() {
-        dd('casa');
-
+    public function login()
+    {
+        if(Auth::attempt(['email' => request('email'), 'password' => request('password')])) {//validar que el usuario existe en la bd 
+            $user = Auth::user();//obtenemos el usuario logueado
+            $success['token'] =  $user->createToken('MyApp')->accessToken; //creamos el token
+            return response()->json(['success' => $success], 200);//se lo enviamos al usuario
+        } else {
+            return response()->json(['error'=>'Unauthorised'], 401); 
+        }
     }
 
     public function index() {
@@ -41,5 +48,10 @@ class UserController extends Controller
         //creamos el token y se lo enviamos al usuario
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         return response()->json(['success'=>$success], 200);
+    }
+
+    public function profile() {
+        $user = Auth::user(); 
+        return response()->json(['success' => $user], 200); 
     }
 }
