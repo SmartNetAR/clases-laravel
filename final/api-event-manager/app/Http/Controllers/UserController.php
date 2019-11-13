@@ -8,6 +8,16 @@ use App\User;
 
 class UserController extends Controller
 {
+    public function login() {
+        dd('casa');
+
+    }
+
+    public function index() {
+        $users = User::all();
+        return response()->json(['users'=>$users], 200);
+    }
+
     public function register(Request $request)
     { 
         $validator = Validator::make($request->all(), [ //creamos la validación
