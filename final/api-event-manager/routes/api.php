@@ -17,11 +17,13 @@ Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
 Route::get('users', 'UserController@index');
 
+Route::post('events', 'EventController@store');
+
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('profile', 'UserController@profile');
 
     //Eventos
-    Route::get('events', 'EventController@index');
+    // Route::get('events', 'EventController@index');
     
 });
