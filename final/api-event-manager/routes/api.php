@@ -23,5 +23,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     //Eventos
     Route::get('events', 'EventController@index');
+
+    Route::post('comment', 'CommentController@store');
     
 });
