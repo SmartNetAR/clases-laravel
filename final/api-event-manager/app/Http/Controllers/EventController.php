@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use App\Event;
+use App\Inscription;
+use Auth;
 
 class EventController extends Controller
 {
@@ -15,7 +17,9 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::with('inscription')
+                    ->get();
+        return response()->json(['events' => $events], 200);
     }
 
     /**
@@ -36,10 +40,29 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $this ->validate($request,['id'=>'required', 'date_time'=>'required', 'name'=>'required','price'=>'required',
-         'place'=>'required', 'description'=>'required', 'large_description'=>'required', 'capacity'=>'required']);
-         
-         Event::create($request->all());
+        $validator = Validator::make($request->all(), [
+            'date_time'=>'required',
+            'name'=>'required',
+            'price'=>'required',
+            'place'=>'required', 
+            'description'=>'required',
+            'large_description'=>'required',
+            'capacity'=>'required'
+        ]);
+        
+         if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
+
+        $event = Event::create($request->all());
+        $user = Auth::user();
+
+        $inscription = new Inscription();
+        $inscription->user_id = $user->id;
+        $inscription->user_role = 0;
+        $inscription->event_id = $event->id;
+        $inscription->date = $event->date_time;
+        $inscription->save();
 
          return ('registro guardado');
 
