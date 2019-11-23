@@ -12,8 +12,7 @@ class Inscription extends Model
      * @var array
      */
     protected $fillable = [
-        'id',
-        'eventId', 'userId', 'date'
+        'id','date'
     ];
     
     public function user()
@@ -26,12 +25,4 @@ class Inscription extends Model
         return $this->belongsTo('App\Event');
     }
 
-    /*
-            $table->bigIncrements('id');
-            $table->uuid('event_id');
-            $table->foreing('event_id')->references('id')->on('events');
-            $table->unsignedBigInteger('user_id');
-            $table->foreing('user_id')->references('id')->on('users');
-            $table->dateTime('date');
-     */
 }

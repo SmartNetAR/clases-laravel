@@ -16,15 +16,21 @@ use Illuminate\Http\Request;
 Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
 Route::get('users', 'UserController@index');
-Route::post('inscription','UserInscription@inscription');
 
-Route::post('events', 'EventController@store');
 
 
 Route::group(['middleware' => 'auth:api'], function () {
+    //Users
     Route::get('profile', 'UserController@profile');
-
-    //Eventos
+    
+    //Events
+    Route::get('events', 'EventController@index');
+    Route::post('events', 'EventController@store');
     // Route::get('events', 'EventController@index');
     
+    //Inscriptions
+    Route::post('inscription','UserInscription@inscription');
+
+
+    //Coments
 });

@@ -15,10 +15,11 @@ class CreateInscriptionsTable extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->uuid('event_id');
-            $table->foreing('event_id')->references('id')->on('events');
+            $table->unsignedBigInteger('event_id');
+            $table->foreign('event_id')->references('id')->on('events');
             $table->unsignedBigInteger('user_id');
-            $table->foreing('user_id')->references('id')->on('users');
+            $table->Integer('user_role');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->dateTime('date');
             $table->timestamps();
         });
