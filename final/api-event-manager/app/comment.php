@@ -3,8 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use User;
-use Event;
+use App\User;
+use App\Event;
 
 class comment extends Model
 {
