@@ -17,8 +17,8 @@ Route::post('register', 'UserController@register');
 Route::post('login', 'UserController@login');
 Route::get('users', 'UserController@index');
 
-Route::post('events', 'EventController@store');
-Route::post('comment', 'CommentController@store');//probando comentarios...
+//Route::post('events', 'EventController@store');
+//Route::post('comment', 'CommentController@store');//probando comentarios...
 
 
 Route::group(['middleware' => 'auth:api'], function () {
@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     //Eventos
     Route::get('events', 'EventController@index');
 
-    //Route::post('comment', 'CommentController@store');
+    
     
     //Events
     Route::get('events', 'EventController@index');
@@ -40,4 +40,5 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 
     //Coments
+    Route::post('events/{event}/comment', 'CommentController@store');
 });
