@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Comment;
 use Auth;
+use App\User;
 use App\Event;
 
 class CommentController extends Controller
@@ -36,4 +37,14 @@ class CommentController extends Controller
             
         
         }
+
+    public function destroy(Request $request,$commentID){
+         
+        if($user=Auth::user()){
+          
+        }
+           
+        
+
+    }
 }

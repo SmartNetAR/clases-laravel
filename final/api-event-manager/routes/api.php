@@ -41,4 +41,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     //Coments
     Route::post('events/{event}/comment', 'CommentController@store');
+    Route::delete('comment/{comment}','CommentController@destroy');
+    Route::get('comment/{comment}/edit','CommentController@edit');
 });
