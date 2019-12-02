@@ -18,7 +18,6 @@ Route::post('login', 'UserController@login');
 Route::get('users', 'UserController@index');
 
 //Route::post('events', 'EventController@store');
-//Route::post('comment', 'CommentController@store');//probando comentarios...
 
 
 Route::group(['middleware' => 'auth:api'], function () {
@@ -43,4 +42,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('events/{event}/comment', 'CommentController@store');
     Route::delete('comment/{comment}','CommentController@destroy');
     Route::get('comment/{comment}/edit','CommentController@edit');
+    Route::get('comments', 'CommentController@index');
 });

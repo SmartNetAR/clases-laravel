@@ -18,4 +18,9 @@ class Event extends Model
     {
         return $this->hasMany('App\Inscription');
     }
+
+    public function comment()
+    {
+        return $this->hasMany('App\Comment');
+    }
 }

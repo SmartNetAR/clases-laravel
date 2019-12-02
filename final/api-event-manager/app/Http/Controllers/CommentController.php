@@ -38,13 +38,18 @@ class CommentController extends Controller
         
         }
 
-    public function destroy(Request $request,$commentID){
+    public function destroy(Request $request){
          
-        if($user=Auth::user()){
-          
-        }
-           
-        
 
     }
+
+    public function index(){
+          
+        $events = Event::with('comment')->get();
+     
+     return response()->json(['events'=>$events]);
+
+
+    }
+
 }
