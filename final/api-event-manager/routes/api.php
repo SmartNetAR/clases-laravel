@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     //Events
     Route::get('events', 'EventController@index');
     Route::post('events', 'EventController@store');
+    Route::get('events/{id}','EventController@show');
     // Route::get('events', 'EventController@index');
     
     //Inscriptions

@@ -45,9 +45,9 @@ class CommentController extends Controller
 
     public function index(){
           
-        $events = Event::with('comment')->get();
+        $comments = Comment::with('event','user')->get();
      
-     return response()->json(['events'=>$events]);
+     return response()->json(['comments'=>$comments]);
 
 
     }
